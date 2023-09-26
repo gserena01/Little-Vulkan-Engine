@@ -18,7 +18,7 @@ namespace lve
     init();
   }
 
-   LveSwapChain::LveSwapChain(LveDevice &deviceRef, VkExtent2D extent, std::shared_ptr<LveSwapChain> previous)
+  LveSwapChain::LveSwapChain(LveDevice &deviceRef, VkExtent2D extent, std::shared_ptr<LveSwapChain> previous)
       : device{deviceRef}, windowExtent{extent}, oldSwapChain{previous}
   {
     init();

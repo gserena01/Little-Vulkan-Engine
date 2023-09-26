@@ -27,17 +27,20 @@ namespace lve
         vkUnmapMemory(lveDevice.device(), vertexBufferMemory);
     }
 
-    void LveModel::draw(VkCommandBuffer commandBuffer) {
+    void LveModel::draw(VkCommandBuffer commandBuffer)
+    {
         vkCmdDraw(commandBuffer, vertexCount, 1, 0, 0);
     }
 
-    void LveModel::bind(VkCommandBuffer commandBuffer) {
+    void LveModel::bind(VkCommandBuffer commandBuffer)
+    {
         VkBuffer buffers[] = {vertexBuffer};
         VkDeviceSize offsets[] = {0};
         vkCmdBindVertexBuffers(commandBuffer, 0, 1, buffers, offsets);
     }
 
-    std::vector<VkVertexInputBindingDescription> LveModel::Vertex::getBindingDescriptions() {
+    std::vector<VkVertexInputBindingDescription> LveModel::Vertex::getBindingDescriptions()
+    {
         std::vector<VkVertexInputBindingDescription> bindingDescriptions(1);
         bindingDescriptions[0].binding = 0;
         bindingDescriptions[0].stride = sizeof(Vertex);
@@ -45,7 +48,8 @@ namespace lve
         return bindingDescriptions;
     }
 
-    std::vector<VkVertexInputAttributeDescription> LveModel::Vertex::getAttributeDescriptions() {
+    std::vector<VkVertexInputAttributeDescription> LveModel::Vertex::getAttributeDescriptions()
+    {
         std::vector<VkVertexInputAttributeDescription> attributeDescriptions(2);
         attributeDescriptions[0].binding = 0;
         attributeDescriptions[0].location = 0;
