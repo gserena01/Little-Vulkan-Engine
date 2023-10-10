@@ -1,39 +1,41 @@
 #pragma once
 
 #include "lve_device.h"
+
+// libs
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
 
-namespace lve
-{
-    class LveModel
-    {
-    public:
-        struct Vertex
-        {
-            glm::vec2 position;
-            glm::vec3 color;
+// std
+#include <vector>
 
-            static std::vector<VkVertexInputBindingDescription> getBindingDescriptions();
-            static std::vector<VkVertexInputAttributeDescription> getAttributeDescriptions();
-        };
+namespace lve {
+class LveModel {
+ public:
+  struct Vertex {
+    glm::vec2 position;
+    glm::vec3 color;
 
-        LveModel(LveDevice &device, const std::vector<Vertex> &vertices);
-        ~LveModel();
+    static std::vector<VkVertexInputBindingDescription> getBindingDescriptions();
+    static std::vector<VkVertexInputAttributeDescription> getAttributeDescriptions();
+  };
 
-        LveModel(const LveModel &) = delete;
-        LveModel &operator=(const LveModel &) = delete;
+  LveModel(LveDevice &device, const std::vector<Vertex> &vertices);
+  ~LveModel();
 
-        void bind(VkCommandBuffer);
-        void draw(VkCommandBuffer);
+  LveModel(const LveModel &) = delete;
+  LveModel &operator=(const LveModel &) = delete;
 
-    private:
-        void createVertexBuffers(const std::vector<Vertex> &vertices);
+  void bind(VkCommandBuffer commandBuffer);
+  void draw(VkCommandBuffer commandBuffer);
 
-        LveDevice &lveDevice;
-        VkBuffer vertexBuffer;
-        VkDeviceMemory vertexBufferMemory;
-        uint32_t vertexCount;
-    };
-}
+ private:
+  void createVertexBuffers(const std::vector<Vertex> &vertices);
+
+  LveDevice &lveDevice;
+  VkBuffer vertexBuffer;
+  VkDeviceMemory vertexBufferMemory;
+  uint32_t vertexCount;
+};
+}  // namespace lve
